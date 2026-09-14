@@ -12,6 +12,6 @@ void draw(){
 void tekenVierkant(int x, int y, int w, int h){
   line(x,y,w,h);
   line(x,y+h,w,h+h);
-  line(x,y,w,h);
-  line(x,y,w,h);
+  line(x,x+h,x,h);
+  line(x*1.75,x+h,w,h);
 }
