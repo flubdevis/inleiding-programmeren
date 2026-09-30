@@ -1,8 +1,11 @@
 int x = 350;
 int y = 350;
+int prevX;
+int prevY;
 int score = -10;
-int highscore;
-int size;
+int highScore;
+int prevSize;
+int size = -1;
 int appleY;
 int appleX;
 boolean dead = false;
@@ -12,6 +15,7 @@ boolean leftPressed = false;
 boolean rightPressed = false;
 boolean rPressed = false;
 boolean eaten = true;
+String dir;
 void setup(){
 size(800,800);
 }
@@ -23,8 +27,10 @@ void draw() {
   fill(0,0,0);
   textSize(20);
   text("score: " + score,700,50);
-  text("hi-score: " + highscore,700,75);
+  text("hi-score: " + highScore,700,75);
     
+      prevY=y;
+    prevX=x;
     
   if (upPressed && !dead) {
        y -= 50;
@@ -56,14 +62,29 @@ void draw() {
     textSize(20);
     text("press r to try again", 300, 400);
     dead = true;
-    
 }
 
 
 
 //snake
 fill(220,170,150);
+
 square(x,y,50);
+
+if(size>0){
+  for(int i = 0; i<=size; i++){
+    fill(220,180,160);
+    square(prevX,prevY,50);
+  }
+}
+//square(prevX,prevY,50);
+//spawn new cubes (need to fix)
+/*if(size>0){
+ fill(220,180,160);
+ for(int i = 0; i<=size; i++){
+   square(x-i*50,y+i*50,50);
+ }
+}*/
 
 //apple
 fill(220,150,120);
@@ -75,11 +96,17 @@ if(appleX == x + 25  && appleY == y + 25){
 
 if(eaten){
 NewApple();
+prevSize = size;
 size++;
 score += 10;
 }
 
+/*if(size>prevSize && prevSize !=-1){
+  println("u should grow bigger rn");
+  prevSize = size;
+}*/
 }
+
 
 void NewApple(){
 
@@ -92,59 +119,53 @@ void NewApple(){
 void reset(){
   x = 350;
   y = 350;
-  size = 0;
+  prevSize = 0;
+  size = -1;
   upPressed = false;
   downPressed = false;
   leftPressed = false;
   rightPressed = false;
   rPressed = false;
   dead = false;
-  if(score > highscore){
-    highscore = score;
+  dir = "";
+  if(score > highScore){
+    highScore = score;
   }
-  
+ 
   score = -10;
   eaten = true;
+  
+  
 }
 
 //input
 void keyPressed() {
- if (keyCode == UP || key == 'w' && !downPressed) {
+  
+ if (keyCode == UP && dir != "DOWN" || key == 'w' && dir != "DOWN") {
     upPressed = true;
     downPressed = false;
     leftPressed = false;
     rightPressed = false;
-  } else if (keyCode == DOWN || key == 's' && !upPressed) {
+    dir = "UP";
+  } else if (keyCode == DOWN && dir != "UP" || key == 's' && dir != "UP") {
     downPressed = true;
     upPressed = false;
     leftPressed = false;
     rightPressed = false;
-  } else if (keyCode == LEFT || key == 'a' && !rightPressed) {
+    dir = "DOWN";
+  } else if (keyCode == LEFT && dir != "RIGHT" || key == 'a' && dir != "RIGHT") {
     leftPressed = true;
     rightPressed = false;
     upPressed = false;
     downPressed = false;
-  } else if (keyCode == RIGHT || key == 'd' && !leftPressed) {
+    dir = "LEFT";
+  } else if (keyCode == RIGHT && dir != "LEFT" || key == 'd' && dir != "LEFT") {
     rightPressed = true;
     leftPressed = false;
     upPressed = false;
     downPressed = false;
+    dir = "RIGHT";
   } else if (key == 'r' && dead) {
     rPressed = true;
   }
 }
-
-/*void keyReleased() {
-  if (keyCode == UP) {
-    upPressed = false;
-  }
-  else if (keyCode == DOWN) {
-    downPressed = false;
-  }
-  else if (keyCode == LEFT) {
-    leftPressed = false;
-  }
-  else if (keyCode == RIGHT) {
-    rightPressed = false;
-  }
-}*/
