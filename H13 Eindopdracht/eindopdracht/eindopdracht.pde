@@ -15,7 +15,6 @@ boolean leftPressed = false;
 boolean rightPressed = false;
 boolean rPressed = false;
 boolean eaten = true;
-String dir;
 void setup(){
 size(800,800);
 }
@@ -141,25 +140,25 @@ void reset(){
 //input
 void keyPressed() {
   
- if (keyCode == UP && dir != "DOWN" || key == 'w' && dir != "DOWN") {
+ if (keyCode == UP && !downPressed || key == 'w' && !downPressed) {
     upPressed = true;
     downPressed = false;
     leftPressed = false;
     rightPressed = false;
     dir = "UP";
-  } else if (keyCode == DOWN && dir != "UP" || key == 's' && dir != "UP") {
+  } else if (keyCode == DOWN && !upPressed || key == 's' && !upPressed) {
     downPressed = true;
     upPressed = false;
     leftPressed = false;
     rightPressed = false;
     dir = "DOWN";
-  } else if (keyCode == LEFT && dir != "RIGHT" || key == 'a' && dir != "RIGHT") {
+  } else if (keyCode == LEFT && !rightPressed || key == 'a' && !rightPressed) {
     leftPressed = true;
     rightPressed = false;
     upPressed = false;
     downPressed = false;
     dir = "LEFT";
-  } else if (keyCode == RIGHT && dir != "LEFT" || key == 'd' && dir != "LEFT") {
+  } else if (keyCode == RIGHT && !leftPressed || key == 'd' && !leftPressed) {
     rightPressed = true;
     leftPressed = false;
     upPressed = false;
