@@ -9,7 +9,6 @@ int[] y = new int[1];
 boolean dead = false;
 boolean rPressed = false;
 String move = "";
-String move2 = "";
 void setup(){
 size(800,800);
 NewApple();
@@ -22,33 +21,33 @@ void draw() {
   
   fill(0,0,0);
   textSize(20);
-  text("score: " + score,700,50);
-  text("hi-score: " + highScore,700,75);
+  text("score: " + score,680,50);
+  text("hi-score: " + highScore,680,75);
   
-if(size>0 && millis() - moveTime >=200){
+if(size>0 && millis() - moveTime >=150){
   for(int i = x.length-1; i>=1; i--){
     x[i]=x[i-1];
   }
   }
-  if(size>0 && millis() - moveTime >=200){
+  if(size>0 && millis() - moveTime >=150){
   for(int i = y.length-1; i>=1; i--){
     y[i]=y[i-1];
   }
   }
   
-  if (move == "UP" && !dead && millis() - moveTime >=200) {
+  if (move == "UP" && !dead && millis() - moveTime >=150) {
        y[0] -= 50;
        moveTime = millis();
   }
-  else if (move == "DOWN" && !dead && millis() - moveTime >=200){
+  else if (move == "DOWN" && !dead && millis() - moveTime >=150){
     y[0] += 50;
     moveTime = millis();
   }
-  else if (move == "LEFT" && !dead && millis() - moveTime >=200){
+  else if (move == "LEFT" && !dead && millis() - moveTime >=150){
     x[0] -= 50;
     moveTime = millis();
   }
-  else if (move == "RIGHT" && !dead && millis() - moveTime >=200){  
+  else if (move == "RIGHT" && !dead && millis() - moveTime >=150){  
     x[0] += 50;
     moveTime = millis();
   } 
