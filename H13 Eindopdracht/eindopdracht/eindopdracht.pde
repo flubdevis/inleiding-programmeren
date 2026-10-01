@@ -76,14 +76,6 @@ if(size>0){
     square(prevX,prevY,50);
   }
 }
-//square(prevX,prevY,50);
-//spawn new cubes (need to fix)
-/*if(size>0){
- fill(220,180,160);
- for(int i = 0; i<=size; i++){
-   square(x-i*50,y+i*50,50);
- }
-}*/
 
 //apple
 fill(220,150,120);
