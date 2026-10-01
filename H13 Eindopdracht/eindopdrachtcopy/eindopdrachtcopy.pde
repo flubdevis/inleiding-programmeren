@@ -9,6 +9,7 @@ int[] y = new int[1];
 boolean dead = false;
 boolean rPressed = false;
 String move = "";
+String move2 = "";
 void setup(){
 size(800,800);
 NewApple();
@@ -73,6 +74,7 @@ if(size>0){
 }
 
 if(dead){
+  background(255,150,150);
   fill(0,0,0);
     textSize(50);
     text("game over! score: " + score, 200, 350);
@@ -116,6 +118,7 @@ void NewApple(){
 
 //reset game
 void reset(){
+  background(250,200,150);
   x = expand(x,1);
   y = expand(y,1);
   x[0] = 350;
