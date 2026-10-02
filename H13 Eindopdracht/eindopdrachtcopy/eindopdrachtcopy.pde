@@ -18,12 +18,12 @@ y[0] = 350;
 
 void draw() {
   background(250,200,150);
-  
+  //score display
   fill(0,0,0);
   textSize(20);
   text("score: " + score,680,50);
   text("hi-score: " + highScore,680,75);
-  
+  //move parts
 if(size>0 && millis() - moveTime >=150){
   for(int i = x.length-1; i>=1; i--){
     x[i]=x[i-1];
@@ -34,7 +34,7 @@ if(size>0 && millis() - moveTime >=150){
     y[i]=y[i-1];
   }
   }
-  
+  //move head
   if (move == "UP" && !dead && millis() - moveTime >=150) {
        y[0] -= 50;
        moveTime = millis();
@@ -51,18 +51,19 @@ if(size>0 && millis() - moveTime >=150){
     x[0] += 50;
     moveTime = millis();
   } 
+  //reset input
   else if (rPressed){
     reset();
     rPressed=false;
   }
   
   
-  
+//die when touching edges
   if(y[0] <= -50 || y[0] >= 800 || x[0] <= -50 || x[0] >= 800){
     
     dead = true;
 }
-
+//die when touching other parts
 if(size>0){
  for(int i =1; i<x.length; i++){
   if(y[0]==y[i] && x[0]==x[i]){
@@ -71,7 +72,7 @@ if(size>0){
 
 }
 }
-
+//death screen
 if(dead){
   background(255,150,150);
   fill(0,0,0);
@@ -81,11 +82,11 @@ if(dead){
     text("press r to try again", 300, 400);
 }
 
-//snake
+//head
 fill(220,170,150);
-
 square(x[0],y[0],50);
 
+//make new squares
 if(size>0){
 for(int i = 0; i<=size; i++){
   square(x[i],y[i],50);
@@ -96,6 +97,7 @@ for(int i = 0; i<=size; i++){
 fill(220,150,120);
 circle(appleX,appleY,25);
 
+//apple collision and grow snake
 if(appleX == x[0] + 25  && appleY == y[0] + 25){
 size++;
 x = expand(x,x.length +1);
@@ -108,9 +110,8 @@ NewApple();
 
 }
 
-
+//spawn new apple
 void NewApple(){
-
   appleX = (Math.round(random(0,15)) * 50 + 25);
   appleY = (Math.round(random(0,15)) * 50 + 25);
 }
