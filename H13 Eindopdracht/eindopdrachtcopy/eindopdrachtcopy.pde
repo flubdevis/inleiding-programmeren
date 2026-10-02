@@ -51,7 +51,7 @@ if(size>0 && millis() - moveTime >=150){
     x[0] += 50;
     moveTime = millis();
   } 
-  //reset input
+  //reset game when dead
   else if (rPressed){
     reset();
     rPressed=false;
@@ -86,7 +86,7 @@ if(dead){
 fill(220,170,150);
 square(x[0],y[0],50);
 
-//make new squares
+//make new parts
 if(size>0){
 for(int i = 0; i<=size; i++){
   square(x[i],y[i],50);
@@ -136,7 +136,6 @@ void reset(){
 
 //input
 void keyPressed() {
-  
  if (keyCode == UP && move != "DOWN" || key == 'w' && move != "DOWN") {
     move = "UP";
   } else if (keyCode == DOWN && move != "UP" || key == 's' && move != "UP") {
